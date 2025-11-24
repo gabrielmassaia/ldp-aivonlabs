@@ -1,9 +1,10 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
-import { MessageCircleIcon, SparklesIcon } from "@/components/icons";
-import { useMobile } from "@/hooks/use-mobile";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -14,54 +15,118 @@ const navLinks = [
 ];
 
 export function Navbar() {
-  const isMobile = useMobile();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0f1216]/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
-        <Link href="#hero" className="flex items-center gap-2 text-[#EDEEF2]">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0F6D7A] to-[#1E1E22]">
-            <SparklesIcon size={18} />
-          </div>
-          <div className="leading-tight">
-            <p className="text-xs uppercase tracking-[0.2em] text-[#cdd0d8]">Aivon Labs</p>
-            <p className="text-base font-semibold">Tecnologia LTDA</p>
-          </div>
-        </Link>
+    <>
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          isScrolled
+            ? "bg-[#030303]/80 backdrop-blur-xl border-b border-white/5 py-4"
+            : "bg-transparent py-6"
+        )}
+      >
+        <div className="container-width flex items-center justify-between">
+          <Link href="/" className="relative z-50 flex items-center gap-2">
+            <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-linear-to-br from-primary/20 to-accent/10 p-px">
+               <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-accent/10 opacity-50" />
+               <div className="relative h-full w-full rounded-xl bg-[#030303]/90 flex items-center justify-center">
+                  <Image
+                    src="/images/logoaivon.png"
+                    alt="Aivon Labs"
+                    width={32}
+                    height={32}
+                    className="object-contain"
+                  />
+               </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="font-display text-lg font-bold tracking-tight text-white">
+                Aivon Labs
+              </span>
+              <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
+                Tecnologia
+              </span>
+            </div>
+          </Link>
 
-        {!isMobile ? (
-          <nav className="flex items-center gap-8 text-sm font-medium text-[#dfe2ea]">
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
-                className="transition-colors hover:text-white"
+                className="text-sm font-medium text-muted-foreground hover:text-white transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <a
+            <Link
               href="https://wa.me/5547991787358"
               target="_blank"
-              rel="noreferrer"
-              className={cn(buttonVariants("accent", "sm"), "shadow-lg shadow-[#FF4D2E]/30")}
+              className="glass-button flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white hover:bg-white/10 transition-all"
             >
-              <MessageCircleIcon size={16} className="mr-2" />
-              Fale com a Aivon Labs
-            </a>
+              <MessageCircle size={16} className="text-accent" />
+              Fale Conosco
+            </Link>
           </nav>
-        ) : (
-          <a
-            href="https://wa.me/5547991787358"
-            target="_blank"
-            rel="noreferrer"
-            className={cn(buttonVariants("accent", "sm"), "shadow-lg shadow-[#FF4D2E]/30")}
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden relative z-50 p-2 text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            <MessageCircleIcon size={16} className="mr-2" />
-            Falar agora
-          </a>
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </motion.header>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-40 bg-[#030303] pt-24 px-6 md:hidden"
+          >
+            <div className="flex flex-col gap-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-2xl font-display font-medium text-white/80 hover:text-white"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <hr className="border-white/10" />
+              <Link
+                href="https://wa.me/5547991787358"
+                target="_blank"
+                className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-primary/10 text-primary font-medium"
+              >
+                <MessageCircle size={20} />
+                Fale Conosco
+              </Link>
+            </div>
+          </motion.div>
         )}
-      </div>
-    </header>
+      </AnimatePresence>
+    </>
   );
 }

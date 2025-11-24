@@ -2,11 +2,26 @@
 
 :root {
   color-scheme: dark;
-  --background: #0a0c10;
-  --foreground: #edeef2;
-  --primary: #0f6d7a;
-  --secondary: #1e1e22;
-  --accent: #ff4d2e;
+  --background: #030303;
+  --foreground: #ffffff;
+
+  /* Brand Colors */
+  --primary: #0F6D7A;
+  --primary-foreground: #ffffff;
+  --secondary: #1E1E22;
+  --secondary-foreground: #ffffff;
+  --accent: #FF4D2E;
+  --accent-foreground: #ffffff;
+
+  /* UI Colors */
+  --muted: #1a1d24;
+  --muted-foreground: #a1a1aa;
+  --border: #27272a;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #0F6D7A 0%, #094b54 100%);
+  --gradient-accent: linear-gradient(135deg, #FF4D2E 0%, #cc3d25 100%);
+  --gradient-dark: linear-gradient(180deg, rgba(15, 109, 122, 0.05) 0%, rgba(10, 12, 16, 0) 100%);
 }
 
 * {
@@ -15,29 +30,65 @@
 }
 
 body {
-  background: radial-gradient(circle at 20% 20%, #0f6d7a22, transparent 25%),
-    radial-gradient(circle at 80% 0%, #ff4d2e1a, transparent 30%),
-    linear-gradient(180deg, #0d0f13 0%, #080a0d 50%, #0a0c10 100%);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-h1,
-h2,
-h3,
-.font-display {
+/* Typography */
+h1, h2, h3, h4, h5, h6, .font-display {
   font-family: var(--font-space-grotesk), var(--font-inter), sans-serif;
   letter-spacing: -0.02em;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
+/* Utilities */
 .glass-panel {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #ffffff, #a1a1aa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-primary {
+  background: linear-gradient(to right, #0F6D7A, #2dd4bf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.container-width {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
