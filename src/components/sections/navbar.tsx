@@ -41,18 +41,6 @@ export function Navbar() {
       >
         <div className="container-width flex items-center justify-between">
           <Link href="/" className="relative z-50 flex items-center gap-2">
-            <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-linear-to-br from-primary/20 to-accent/10 p-px">
-               <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-accent/10 opacity-50" />
-               <div className="relative h-full w-full rounded-xl bg-[#030303]/90 flex items-center justify-center">
-                  <Image
-                    src="/images/logoaivon.png"
-                    alt="Aivon Labs"
-                    width={32}
-                    height={32}
-                    className="object-contain"
-                  />
-               </div>
-            </div>
             <div className="flex flex-col">
               <span className="font-display text-lg font-bold tracking-tight text-white">
                 Aivon Labs
