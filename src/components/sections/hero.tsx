@@ -1,106 +1,146 @@
-import { ArrowRightIcon, InstagramIcon, MessageCircleIcon, RocketIcon } from "@/components/icons";
-import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
+"use client";
+
+import { motion } from "framer-motion";
+import { ArrowRight, MessageCircle, CheckCircle2, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-gradient-to-b from-[#0f1216] via-[#0d0f13] to-[#0a0c10]"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
     >
-      <div className="absolute inset-0">
-        <div className="absolute left-1/4 top-10 h-72 w-72 rounded-full bg-[#0F6D7A]/30 blur-[120px]" />
-        <div className="absolute right-1/4 top-32 h-80 w-80 rounded-full bg-[#FF4D2E]/20 blur-[120px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,#ffffff0d,transparent_40%)]" />
-      </div>
-      <div className="relative mx-auto max-w-6xl px-4 pb-24 pt-20 md:px-6 lg:pt-28">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-3xl space-y-6 text-[#EDEEF2]">
-            <Badge className="w-fit bg-white/10 text-[#EDEEF2]">Tecnologia sob medida</Badge>
-            <h1 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-              Tecnologia sob medida para escalar o seu negócio.
-            </h1>
-            <p className="max-w-2xl text-lg text-[#cdd0d8] sm:text-xl">
-              Websites, sistemas e automações inteligentes que aumentam sua produtividade e reduzem retrabalho. Tudo pronto
-              para entrar em produção e gerar resultado real.
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href="https://wa.me/5547991787358"
-                target="_blank"
-                rel="noreferrer"
-                className={cn(buttonVariants("accent", "lg"), "shadow-lg shadow-[#FF4D2E]/30")}
-              >
-                <MessageCircleIcon size={18} className="mr-2" />
-                Fale com a Aivon Labs
-              </a>
-              <a
-                href="https://instagram.com/aivonlabs"
-                target="_blank"
-                rel="noreferrer"
-                className={cn(buttonVariants("ghost", "lg"), "border border-white/15 px-6")}
-              >
-                <InstagramIcon size={18} className="mr-2" />
-                Instagram
-              </a>
-              <Button variant="ghost" size="lg" className="gap-2 text-[#cdd0d8]">
-                <RocketIcon size={18} />
-                Projetos prontos para decolar
-              </Button>
-            </div>
-            <div className="grid grid-cols-1 gap-4 text-sm text-[#cdd0d8] sm:grid-cols-3">
-              {["Automação com N8N", "Sistemas sob medida", "Sites rápidos e rastreáveis"].map((item) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3"
-                >
-                  <ArrowRightIcon size={16} className="text-[#FF4D2E]" />
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,#FF4D2E14,transparent_45%)]" />
-            <div className="relative space-y-6">
-              <div className="flex items-center justify-between rounded-2xl bg-[#0f6d7a]/10 px-4 py-3 text-sm text-[#EDEEF2]">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#a7abb5]">Status</p>
-                  <p className="font-semibold">Tudo conectado</p>
-                </div>
-                <Badge variant="success">em produção</Badge>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-[#1E1E22]/70 p-5 text-[#EDEEF2] shadow-lg">
-                <div className="mb-4 flex items-center justify-between">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-[#a7abb5]">Operação</p>
-                    <p className="text-lg font-semibold">Fluxo automatizado</p>
-                  </div>
-                  <Badge variant="outline" className="text-xs">N8N + API</Badge>
-                </div>
-                <div className="space-y-3 text-sm text-[#cdd0d8]">
-                  <div className="flex items-center justify-between rounded-xl bg-white/5 px-3 py-2">
-                    <span>CRM & atendimento sincronizados</span>
-                    <span className="text-[#FF4D2E]">-10h/sem</span>
-                  </div>
-                  <div className="flex items-center justify-between rounded-xl bg-white/5 px-3 py-2">
-                    <span>Alertas pró-ativos e logs claros</span>
-                    <span className="text-emerald-400">98% uptime</span>
-                  </div>
-                  <div className="flex items-center justify-between rounded-xl bg-white/5 px-3 py-2">
-                    <span>Dashboard com métricas de conversão</span>
-                    <span className="text-[#cdd0d8]">real time</span>
-                  </div>
-                </div>
-              </div>
-              <div className="rounded-2xl border border-white/5 bg-white/[0.03] p-4 text-xs text-[#cdd0d8]">
-                &ldquo;Aivon Labs mapeou nossos processos, automatizou etapas e hoje a equipe tem foco no que importa.&rdquo;
-                <p className="mt-2 text-[#EDEEF2]">— Equipe de Operações</p>
-              </div>
-            </div>
-          </div>
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl">
+            <div className="absolute top-[20%] left-[10%] w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-pulse" />
+            <div className="absolute top-[40%] right-[10%] w-96 h-96 bg-accent/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: "2s" }} />
         </div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+      </div>
+
+      <div className="container-width relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+        {/* Text Content */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="space-y-8"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+            </span>
+            <span className="text-xs font-medium text-white/80 tracking-wide uppercase">Tecnologia sob medida</span>
+          </div>
+
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold leading-[1.1] tracking-tight text-white">
+            Escale seu negócio com <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-emerald-400">Inteligência</span>
+          </h1>
+
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-xl leading-relaxed">
+            Desenvolvemos ecossistemas digitais de alta performance. Sites, automações e sistemas que transformam visitantes em clientes e dados em lucro.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <a
+              href="https://wa.me/5547991787358"
+              target="_blank"
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-accent hover:bg-accent/90 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+            >
+              <span className="mr-2">Começar Projeto</span>
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              <div className="absolute inset-0 rounded-full ring-2 ring-white/20 group-hover:ring-white/40 transition-all" />
+            </a>
+
+            <a
+              href="#cases"
+              className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white transition-all duration-200 bg-white/5 border border-white/10 hover:bg-white/10 rounded-full backdrop-blur-sm"
+            >
+              Ver Cases
+            </a>
+          </div>
+
+          <div className="pt-8 flex items-center gap-8 text-sm text-muted-foreground border-t border-white/5">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-primary" />
+              <span>Entregas Rápidas</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-primary" />
+              <span>Suporte Premium</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-primary" />
+              <span>Alta Conversão</span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Visual Content */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative lg:h-[600px] flex items-center justify-center"
+        >
+           <div className="relative w-full max-w-[500px] aspect-square">
+              {/* Abstract decorative circles */}
+              <div className="absolute inset-0 rounded-full border border-white/5 animate-[spin_10s_linear_infinite]" />
+              <div className="absolute inset-4 rounded-full border border-white/5 animate-[spin_15s_linear_infinite_reverse]" />
+              <div className="absolute inset-12 rounded-full border border-white/5 animate-[spin_20s_linear_infinite]" />
+
+              {/* Central Card */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative w-full max-w-sm glass-panel rounded-2xl p-6 shadow-2xl border-t border-white/10">
+                   <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-3">
+                         <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center">
+                            <Zap className="w-5 h-5 text-primary" />
+                         </div>
+                         <div>
+                            <p className="text-sm font-medium text-white">Performance</p>
+                            <p className="text-xs text-emerald-400">+127% este mês</p>
+                         </div>
+                      </div>
+                      <div className="px-2 py-1 rounded-md bg-white/5 text-xs text-white/60">Live</div>
+                   </div>
+
+                   <div className="space-y-4">
+                      <div className="h-24 rounded-lg bg-linear-to-r from-primary/10 to-transparent relative overflow-hidden group">
+                         <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                         <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-primary/50 to-transparent" />
+                         <div className="p-3">
+                            <div className="w-1/2 h-2 bg-white/10 rounded-full mb-2" />
+                            <div className="w-1/3 h-2 bg-white/5 rounded-full" />
+                         </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                         <div className="p-3 rounded-lg bg-white/5 border border-white/5">
+                            <p className="text-xs text-muted-foreground mb-1">Leads</p>
+                            <p className="text-lg font-bold text-white">2,543</p>
+                         </div>
+                         <div className="p-3 rounded-lg bg-white/5 border border-white/5">
+                            <p className="text-xs text-muted-foreground mb-1">Conversão</p>
+                            <p className="text-lg font-bold text-white">4.8%</p>
+                         </div>
+                      </div>
+                   </div>
+
+                   {/* Floating Elements */}
+                   <motion.div
+                      animate={{ y: [0, -10, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                      className="absolute -right-12 -top-12 p-4 glass-panel rounded-xl border border-white/10"
+                   >
+                      <MessageCircle className="w-6 h-6 text-accent" />
+                   </motion.div>
+                </div>
+              </div>
+           </div>
+        </motion.div>
       </div>
     </section>
   );
