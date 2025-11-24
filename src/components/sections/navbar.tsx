@@ -41,8 +41,6 @@ export function Navbar() {
       >
         <div className="container-width flex items-center justify-between">
           <Link href="/" className="relative z-50 flex items-center gap-2">
-            <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-linear-to-br from-primary/20 to-accent/10 p-px">
-            </div>
             <div className="flex flex-col">
               <span className="font-display text-lg font-bold tracking-tight text-white">
                 Aivon Labs
