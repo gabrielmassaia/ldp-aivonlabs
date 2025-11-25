@@ -60,13 +60,26 @@ export function ContactFooter() {
             <div className="space-y-6">
               <h3 className="text-lg font-bold text-white">Links Rápidos</h3>
               <ul className="space-y-4">
-                {["Soluções", "Benefícios", "Casos de Sucesso", "Sobre Nós"].map((item) => (
-                  <li key={item}>
-                    <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
+                <li>
+                  <Link href="#products" className="text-muted-foreground hover:text-primary transition-colors">
+                    Soluções
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#benefits" className="text-muted-foreground hover:text-primary transition-colors">
+                    Benefícios
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#cases" className="text-muted-foreground hover:text-primary transition-colors">
+                    Casos de Sucesso
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#why" className="text-muted-foreground hover:text-primary transition-colors">
+                    Sobre Nós
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -104,9 +117,14 @@ export function ContactFooter() {
             <span className="text-white font-bold tracking-tight">Aivon Labs</span>
           </div>
 
-          <p className="text-sm text-muted-foreground text-center md:text-right">
-            © {currentYear} Aivon Labs Tecnologia LTDA. Todos os direitos reservados.
-          </p>
+          <div className="flex flex-col md:items-end gap-1">
+            <p className="text-sm text-muted-foreground text-center md:text-right">
+              © {currentYear} Aivon Labs Tecnologia LTDA. Todos os direitos reservados.
+            </p>
+            <p className="text-xs text-muted-foreground/60 text-center md:text-right">
+              CNPJ: 62.450.771/0001-38
+            </p>
+          </div>
         </div>
       </div>
     </footer>
